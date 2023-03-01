@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TatBlog.Core.DTO
 {
-    public class CategoryItem
+    public class TagItem
     {
         public int Id { get; set; }
 
@@ -16,9 +16,6 @@ namespace TatBlog.Core.DTO
 
         public string Description { get; set; }
 
-        public bool ShowOnMenu { get; set; }
-
         public int PostCount { get; set; }
     }
-
 }
