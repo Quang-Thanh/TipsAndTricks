@@ -2,22 +2,27 @@
 //Console.WriteLine("Hello, World!");
 using TatBlog.Data.Contexts;
 using TatBlog.Data.Seeders;
+using TatBlog.Services.Blogs;
 
 var context = new BlogDbContext();
 
-var posts = context.Posts
-    .Where(p => p.Published)
-    .OrderBy(p => p.Title)
-    .Select(p => new
-    {
-        Id = p.Id,
-        Title = p.Title,
-        ViewCout = p.ViewCout,
-        PostedDate = p.PostedDate,
-        Author = p.Author.FullName,
-        Category = p.Category.Name
-    })
-    .ToList();
+IBlogRepository blogRepo = new BlogRepository(context);
+
+var posts = await blogRepo.GetPopularArticlesAsync(3);
+
+//var posts = context.Posts
+//    .Where(p => p.Published)
+//    .OrderBy(p => p.Title)
+//    .Select(p => new
+//    {
+//        Id = p.Id,
+//        Title = p.Title,
+//        ViewCout = p.ViewCout,
+//        PostedDate = p.PostedDate,
+//        Author = p.Author.FullName,
+//        Category = p.Category.Name
+//    })
+//    .ToList();
 
 
 
