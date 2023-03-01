@@ -169,7 +169,7 @@ namespace TatBlog.Data.Seeders
                     Meta = "Tự hào khi đứng số 1 trên thị trường hiện nay",
                     UrlSlug = "Apple",
                     Published = true,
-                    PostedDate = new DateTime(2009, 9, 10, 30, 20, 0),
+                    PostedDate = new DateTime(2009, 9, 10, 10, 20, 0),
                     ModifiedDate = null,
                     ViewCout = 20,
                     Author = authors[1],
@@ -180,100 +180,6 @@ namespace TatBlog.Data.Seeders
                     }
                 },
 
-                new()
-                {
-                    Title = "SamSung",
-                    ShortDescription = "Thương hiệu điện tử nổi tiếng với chất lượng tốt",
-                    Description = "Có nhiều tính năng nổi trội",
-                    Meta = "Tự hào khi có thể cạnh tranh với Apple",
-                    UrlSlug = "SamSung",
-                    Published = true,
-                    PostedDate = new DateTime(2009, 9, 20, 20, 20, 0),
-                    ModifiedDate = null,
-                    ViewCout = 20,
-                    Author = authors[2],
-                    Category = categories[2],
-                    Tags = new List<Tag>()
-                    {
-                        tags[2]
-                    }
-                },
-
-                new()
-                {
-                    Title = "Oppo",
-                    ShortDescription = "Hãng điện thoại với giá sinh viên",
-                    Description = "Có tính năng chụp ảnh sắc nét",
-                    Meta = "Tự hào khi là dòng điện thoại được ưa chuộng",
-                    UrlSlug = "Oppo",
-                    Published = true,
-                    PostedDate = new DateTime(2009, 4, 30, 20, 10, 0),
-                    ModifiedDate = null,
-                    ViewCout = 20,
-                    Author = authors[3],
-                    Category = categories[3],
-                    Tags = new List<Tag>()
-                    {
-                        tags[3]
-                    }
-                },
-
-                new()
-                {
-                    Title = "Google",
-                    ShortDescription = "Công cụ tìm kiếm phổ biến hiện nay",
-                    Description = "Có các tính năng nổi bật và trở thành công cụ phổ biến hiện nay",
-                    Meta = "Có nhiều chuyên gia giỏi, có các thuật toán tiên tiến",
-                    UrlSlug = "Google",
-                    Published = true,
-                    PostedDate = new DateTime(2009, 4, 3, 2, 1, 0),
-                    ModifiedDate = null,
-                    ViewCout = 20,
-                    Author = authors[4],
-                    Category = categories[4],
-                    Tags = new List<Tag>()
-                    {
-                        tags[4]
-                    }
-                },
-
-                new()
-                {
-                    Title = "Microsoft",
-                    ShortDescription = "Là một tập đoàn đa quốc gia",
-                    Description = "Có nhiều tính năng như là quản lý, truy cập ở tất cả mọi nơi mà chỉ cần ở một chỗ",
-                    Meta = "Có nhiều tính năng nổi bật",
-                    UrlSlug = "Microsoft",
-                    Published = true,
-                    PostedDate = new DateTime(2009, 4, 3, 2, 1, 0),
-                    ModifiedDate = null,
-                    ViewCout = 20,
-                    Author = authors[5],
-                    Category = categories[5],
-                    Tags = new List<Tag>()
-                    {
-                        tags[5]
-                    }
-                },
-
-                new()
-                {
-                    Title = "Microsoft Edge",
-                    ShortDescription = "Là một trình duyệt web thế hệ mới",
-                    Description = "Có các tính năng nổi bật hơn Internet Explorer",
-                    Meta = "Được nâng cấp mới mẻ",
-                    UrlSlug = "Microsoft Edge",
-                    Published = true,
-                    PostedDate = new DateTime(2015, 4, 3, 2, 1, 0),
-                    ModifiedDate = null,
-                    ViewCout = 20,
-                    Author = authors[6],
-                    Category = categories[6],
-                    Tags = new List<Tag>()
-                    {
-                        tags[6]
-                    }
-                }
             };
             _dbContext.AddRange(posts);
             _dbContext.SaveChanges();
