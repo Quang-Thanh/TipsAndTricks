@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using TatBlog.Core.DTO;
 using TatBlog.Core.Entities;
 using TatBlog.Data.Contexts;
 
@@ -18,6 +19,31 @@ namespace TatBlog.Services.Blogs
         public BlogRepository(BlogDbContext context)
         {
             _context = context;
+        }
+
+        public async Task<IList<CategoryItem>> GetCategoriesAsync(
+        bool showOnMenu = false,
+        CancellationToken cancellationToken = default)
+        {
+            IQueryable<Category> categories = _context.Set<Category>();
+
+            if (showOnMenu)
+            {
+                categories = categories.Where(x => x.ShowOnMenu);
+            }
+
+            return await categories
+                .OrderBy(x => x.Name)
+                .Select(x => new CategoryItem()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlSlug = x.UrlSlug,
+                    Description = x.Description,
+                    ShowOnMenu = x.ShowOnMenu,
+                    PostCount = x.Posts.Count(p => p.Published)
+                })
+                .ToListAsync(cancellationToken);
         }
 
         public async Task<IList<Post>> GetPopularArticlesAsync(int numPosts, CancellationToken cancellationToken = default)
