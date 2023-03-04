@@ -30,6 +30,14 @@ foreach (var item in tagsList)
         item.Id, item.Name, item.PostCount);
 }
 
+
+
+var tag = await blogRepo.GetTagFromSlugAsync("workpress");
+Console.WriteLine("{0,-5}{1,-50}{2,10}",
+    tag.Id, tag.Name, tag.UrlSlug);
+
+
+
 //var posts = await blogRepo.GetPopularArticlesAsync(3);
 
 //var posts = context.Posts
@@ -72,3 +80,4 @@ foreach (var item in tagsList)
 //    Console.WriteLine("Category : {0}", post.Category);
 //    Console.WriteLine("".PadRight(80, '-'));
 //}
+

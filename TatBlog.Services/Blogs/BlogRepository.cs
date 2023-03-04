@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -110,5 +111,13 @@ namespace TatBlog.Services.Blogs
             return await _context.Set<Post>()
                 .AnyAsync(x => x.Id != postId && x.UrlSlug == slug, cancellationToken);
         }
+
+        public async Task<Tag> GetTagFromSlugAsync(string slug, CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Tag>()
+                .Where(t => t.UrlSlug == slug)
+                .FirstOrDefaultAsync(cancellationToken);
+        }
+
     }
 }

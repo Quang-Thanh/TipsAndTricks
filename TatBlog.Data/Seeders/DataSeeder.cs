@@ -113,7 +113,7 @@ namespace TatBlog.Data.Seeders
             var tags = new List<Tag>()
             {
                 new() {Name = "Google", Description = "Google applications", UrlSlug = "google"},
-                new() {Name = "ASP.NET MVC", Description = "ASP.NET MVC", UrlSlug = "ASP.NET MVC"},
+                new() {Name = "ASP.NET MVC", Description = "ASP.NET MVC", UrlSlug = "aspnet mvc"},
                 new() {Name = "Razor Page", Description = "Razor Page", UrlSlug = "razor page"},
                 new() {Name = "Blazor", Description = "Blazor", UrlSlug = "blazor"},
                 new() {Name = "Deep Learning", Description = "Deep Learning", UrlSlug = "deep learning"},
@@ -122,7 +122,7 @@ namespace TatBlog.Data.Seeders
                 new() {Name = "Workpress", Description = "Workpress", UrlSlug = "workpress"},
                 new() {Name = "Google", Description = "Google applications", UrlSlug = "google"},
                 new() {Name = "Blazor", Description = "Blazor", UrlSlug = "blazor"},
-                new() {Name = "ASP.NET MVC", Description = "ASP.NET MVC", UrlSlug = "ASP.NET MVC"},
+                new() {Name = "ASP.NET MVC", Description = "ASP.NET MVC", UrlSlug = "aspnet mvc"},
                 new() {Name = "Workpress", Description = "Workpress", UrlSlug = "workpress"},
                 new() {Name = "Deep Learning", Description = "Deep Learning", UrlSlug = "deep learning"},
                 new() {Name = "Neural Network", Description = "Neural Network", UrlSlug = "neural network"},
