@@ -38,8 +38,22 @@ namespace TatBlog.Services.Blogs
         IPagingParams pagingParams,
         CancellationToken cancellationToken = default);
 
-        Task<Tag> GetTagFromSlugAsync(string slug, CancellationToken cancellationToken = default);
+        //Phần C lab01
+        //Task<Tag> GetTagFromSlugAsync(string slug, CancellationToken cancellationToken = default);
+        //a
+        //Task<Tag> FindTagBySlugAsync(
+        //    string slug, CancellationToken cancellationToken = default);
 
+		//b
+		//Task<IList<TagItem>> GetTagAsync(CancellationToken cancellationToken = default);
 
-    }
+        //c danh sách tất cả thẻ tag
+        Task<IList<TagItem>> FindTagItemSlugAsync(CancellationToken cancellationToken= default);
+
+        // Câu d:
+        Task<bool> DeleteTagByIdAsync(int id, CancellationToken cancellationToken = default);
+
+        // Câu g:
+        Task<bool> AddOrUpdateCategoryAsync(Category newCategory, CancellationToken cancellationToken= default);
+	}
 }

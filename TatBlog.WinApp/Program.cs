@@ -10,31 +10,48 @@ var context = new BlogDbContext();
 IBlogRepository blogRepo = new BlogRepository(context);
 
 //var categories = await blogRepo.GetCategoriesAsync();
-var pagingParams = new PagingParams
-{
-    PageNumber = 1,
-    PageSize = 5,
-    SortColumn = "Name",
-    SortOrder = "DESC"
+//var pagingParams = new PagingParams
+//{
+//    PageNumber = 1,
+//    PageSize = 5,
+//    SortColumn = "Name",
+//    SortOrder = "DESC"
 
-};
+//};
 
-var tagsList = await blogRepo.GetPagedTagsAsync(pagingParams);
+//var tagsList = await blogRepo.GetPagedTagsAsync(pagingParams);
 
-Console.WriteLine("{0,-5}{1,-50}{2,10}",
-    "ID", "Name", "Count");
+//Console.WriteLine("{0,-5}{1,-50}{2,10}",
+//    "ID", "Name", "Count");
 
-foreach (var item in tagsList)
-{
-    Console.WriteLine("{0,-5}{1,-50}{2,10}",
-        item.Id, item.Name, item.PostCount);
-}
+//foreach (var item in tagsList)
+//{
+//    Console.WriteLine("{0,-5}{1,-50}{2,10}",
+//        item.Id, item.Name, item.PostCount);
+//}
+
+//Phần C
+//1 a
+//var tagSlug = await blogRepo.FindTagBySlugAsync("Ruby");
+//Console.WriteLine("{0,-5}{1,-50}{2,10}",
+//    tagSlug.Id, tagSlug.Name, tagSlug.UrlSlug);
+
+
+//b
+//var tagList = await blogRepo.GetTagAsync();
+//Console.WriteLine("{0,-5}{1,-50}{2,10}",
+//    "ID", "Name", "Count");
+//foreach(var item in tagList)
+//{
+//    Console.WriteLine("{0,-5}{1,-50}{2,10}",
+//        item.Id, item.Name, item.PostCount);
+//}    
 
 
 
-var tag = await blogRepo.GetTagFromSlugAsync("workpress");
-Console.WriteLine("{0,-5}{1,-50}{2,10}",
-    tag.Id, tag.Name, tag.UrlSlug);
+//var tag = await blogRepo.GetTagFromSlugAsync("workpress");
+//Console.WriteLine("{0,-5}{1,-50}{2,10}",
+//    tag.Id, tag.Name, tag.UrlSlug);
 
 
 
@@ -81,3 +98,27 @@ Console.WriteLine("{0,-5}{1,-50}{2,10}",
 //    Console.WriteLine("".PadRight(80, '-'));
 //}
 
+
+// Câu c: Lấy danh sách tất cả các thẻ (Tag) kèm theo số bài viết chứa thẻ đó. Kết 
+//  quả trả về kiểu IList<TagItem>.
+//var listItemTag = await blogRepo.FindTagItemSlugAsync();
+//foreach (var tagItem in listItemTag)
+//{
+//    Console.WriteLine(">> Check tag item");
+//    Console.WriteLine("{0,-5}{1, -20}{2, -10}", tagItem.Id, tagItem.Name, tagItem.PostCount);
+//}
+
+// Câu d: 
+//var isDelete = await blogRepo.DeleteTagByIdAsync(77);
+//Console.WriteLine(isDelete ? "True" : "False");
+
+// g
+var isAdd = await blogRepo.AddOrUpdateCategoryAsync(new TatBlog.Core.Entities.Category()
+{
+	Name = "Machine Learning",
+	Description = "Hoc AI voi Co Luong vui qua",
+	UrlSlug = "machine-learning",
+	ShowOnMenu = true
+});
+
+Console.WriteLine(isAdd ? "True" : "False");
