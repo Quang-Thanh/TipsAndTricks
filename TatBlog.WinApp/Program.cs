@@ -116,7 +116,7 @@ IBlogRepository blogRepo = new BlogRepository(context);
 var isAdd = await blogRepo.AddOrUpdateCategoryAsync(new TatBlog.Core.Entities.Category()
 {
 	Name = "Machine Learning",
-	Description = "Hoc AI voi Co Luong vui qua",
+	Description = "Hoc IT that vui",
 	UrlSlug = "machine-learning",
 	ShowOnMenu = true
 });

@@ -173,8 +173,8 @@ namespace TatBlog.Services.Blogs
 		public async Task<bool> AddOrUpdateCategoryAsync(Category newCategory, CancellationToken cancellationToken = default)
 		{
 			_context.Set<Category>()
-				.Entry(newCategory).State = newCategory.Id == 0 
-				? EntityState.Added 
+				.Entry(newCategory).State = newCategory.Id == 0
+				? EntityState.Added
 				: EntityState.Modified;
 			_context.SaveChanges();
 			return true;
