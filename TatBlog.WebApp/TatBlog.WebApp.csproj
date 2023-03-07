@@ -14,11 +14,11 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="wwwroot\lib\" />
     <Folder Include="wwwroot\fonts\" />
     <Folder Include="wwwroot\images\" />
-    <Folder Include="wwwroot\lib\" />
     <Folder Include="wwwroot\templates\emails\" />
-    <Folder Include="wwwroot\uploads\pictures\" />
+    <Folder Include="wwwroot\uploads\NewFolder\pictures\" />
   </ItemGroup>
 
 </Project>

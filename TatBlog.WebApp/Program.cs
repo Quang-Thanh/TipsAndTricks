@@ -1,4 +1,6 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Microsoft.AspNetCore.Builder;
+
+var builder = WebApplication.CreateBuilder(args);
 {
 	//Thêm các dịch vụ đucợ yên cầu bới MVC Framework
 	builder.Services.AddControllersWithViews();
@@ -34,11 +36,17 @@ var app = builder.Build();
 
 	//Định nghĩa router template, route constraint cho các
 	//endpoints kết hợp với các action trong các controller
+	
+	
 	app.MapControllerRoute(
-		name:"default", 
-		pattern:"{controller=Blog}/{acion=Index}/{id?}");
+			name: "default",
+			pattern: "{controller=Blog}/{action=Index}/{id?}");
+	//app.UseEndpoints(endpoints =>
+	//{
+	//	endpoints.MapControllerRoute(
+	//		name: "default",
+	//		pattern: "{controller=Blog}/{action=Index}/{id?}");
+	//});
 }
-
-//app.MapGet("/", () => "Hello World!");
 
 app.Run();
