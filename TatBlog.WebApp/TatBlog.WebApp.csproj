@@ -18,7 +18,7 @@
     <Folder Include="wwwroot\fonts\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\templates\emails\" />
-    <Folder Include="wwwroot\uploads\NewFolder\pictures\" />
+    <Folder Include="wwwroot\uploads\pictures\" />
   </ItemGroup>
 
 </Project>
