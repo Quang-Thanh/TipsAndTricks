@@ -17,6 +17,7 @@ namespace TatBlog.WebApp.Controllers
         }
 
         public async Task<IActionResult> Index(
+            [FromQuery(Name ="k")] string keyWord = null,
             [FromQuery(Name = "p")] int pageNumber = 1,
             [FromQuery(Name = "ps")] int pageSize = 10)
         {
@@ -24,7 +25,10 @@ namespace TatBlog.WebApp.Controllers
             var postQuery = new PostQuery()
             {
                 //chỉ lấy những bài viết có trạng thái Published
-                PublishedOnly = true
+                PublishedOnly = true,
+
+                //Tìm bài viết theo từ khóa
+                keyWord = keyWord
             };
 
             //truy vấn các bài viết theo điều kiện đã tạo
@@ -38,12 +42,12 @@ namespace TatBlog.WebApp.Controllers
             return View(postsList);
         }
 
-        public IActionResult Index()
-        {
-            ViewBag.CurrentTime = DateTime.Now.ToString("HH:mm:ss");
+        //public IActionResult Index()
+        //{
+        //    ViewBag.CurrentTime = DateTime.Now.ToString("HH:mm:ss");
 
-            return View();
-        }
+        //    return View();
+        //}
 
         public IActionResult About()
             => View();
