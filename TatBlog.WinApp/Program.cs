@@ -5,6 +5,7 @@ using TatBlog.Data.Seeders;
 using TatBlog.Services.Blogs;
 using TatBlog.WinApp;
 
+
 var context = new BlogDbContext();
 
 IBlogRepository blogRepo = new BlogRepository(context);
@@ -37,6 +38,7 @@ Console.WriteLine("{0,-5}{1,-50}{2,10}",
     tag.Id, tag.Name, tag.UrlSlug);
 
 
+//Phần 9 --> lab01S
 
 //var posts = await blogRepo.GetPopularArticlesAsync(3);
 

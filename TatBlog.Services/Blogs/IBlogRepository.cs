@@ -40,6 +40,9 @@ namespace TatBlog.Services.Blogs
 
         Task<Tag> GetTagFromSlugAsync(string slug, CancellationToken cancellationToken = default);
 
-
+        //Phần9 --> Lab01S
+        Task<IPagedList> GetPagedPostsAsync(
+            PostQuery condition, int pageNumber, int pageSize,
+            CancellationToken cancellationToken = default);
     }
 }
