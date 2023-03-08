@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using TatBlog.Core.Entities;
 using TatBlog.Data.Contexts;
 using TatBlog.Data.Seeders;
 using TatBlog.Services.Blogs;
@@ -47,11 +48,28 @@ var app = builder.Build();
 
 	//Định nghĩa router template, route constraint cho các
 	//endpoints kết hợp với các action trong các controller
-	
+
+
+	app.MapControllerRoute(
+			//name: "default",
+			//pattern: "{controller=Blog}/{action=Index}/{id?}"
+			name: "post-by-category",
+			pattern: "blog/category/{slug}",
+			defaults: new { controller = "Blog", action = "Category"});
 	
 	app.MapControllerRoute(
-			name: "default",
-			pattern: "{controller=Blog}/{action=Index}/{id?}");
+		name: "post-by-tag",
+		pattern: "blog/tag/{slug}",
+		defaults: new { controller = "Blog", action = "Tag"});
+
+	app.MapControllerRoute(
+		name: "single",
+		pattern: "blog/post/{year:int}/{month:int}/{day:int}/{slug}",
+		defaults:new { controller = "Blog", action = "Post"});
+
+	app.MapControllerRoute(
+		name: "default",
+		pattern: "{controller=Blog}/{action=Index}/{id?}");
 	//app.UseEndpoints(endpoints =>
 	//{
 	//	endpoints.MapControllerRoute(
