@@ -1,0 +1,21 @@
+﻿@model IPagedList<Post>
+@{
+	ViewData["PageTitle"] = "Bài viết thuộc chủ đề";
+
+	var NameCategory = (ViewBag.NameCategory) ?? ("Không tìm thấy chủ đề");
+}
+
+<div class="p-4">
+	@if (!string.IsNullOrWhiteSpace(NameCategory))
+	{
+		<h3 class="text-primary mb-3">
+			Những bài viết thuộc chủ đề '@NameCategory'
+		</h3>
+	}
+	@foreach (var postItem in Model)
+	{
+		<partial name="_PostList" model="postItem" />
+	}
+
+	<partial name="_Pager" model="@Model" />
+</div>

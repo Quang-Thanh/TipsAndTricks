@@ -209,6 +209,19 @@ namespace TatBlog.Services.Blogs
             return posts;
         }
 
+		public async Task<Category> GetCategoryFromSlugAsync(string slug, CancellationToken cancellationToken = default)
+		{
+			return await _context.Set<Category>()
+				.Where(t => t.UrlSlug == slug)
+				.FirstOrDefaultAsync(cancellationToken);
+		}
+        public async Task<Author> GetAuthorFromSlugAsync(string slug, CancellationToken cancellationToken = default)
+		{
+			return await _context.Set<Author>()
+				.Where(t => t.UrlSlug == slug)
+				.FirstOrDefaultAsync(cancellationToken);
+		}
+
 		//public Task<IPagedList> GetPagedPostsAsync(PostQuery condition, int pageNumber, int pageSize, CancellationToken cancellationToken = default)
 		//{
 		//	throw new NotImplementedException();
