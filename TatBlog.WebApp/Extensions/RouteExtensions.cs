@@ -14,6 +14,11 @@ namespace TatBlog.WebApp.Extensions
 			this IEndpointRouteBuilder endpoinrs)
 		{
 			endpoinrs.MapControllerRoute(
+				name: "post-by-Author",
+				pattern: "blog/Author/{slug}",
+				defaults: new { controller = "Blog", action = "Author" });
+
+			endpoinrs.MapControllerRoute(
 				name: "post-by-category",
 				pattern: "blog/category/{slug}",
 				defaults: new { controller = "Blog", action = "Category" });
