@@ -13,26 +13,37 @@ namespace TatBlog.WebApp.Extensions
 		public static IEndpointRouteBuilder UseBlogRoutes(
 			this IEndpointRouteBuilder endpoinrs)
 		{
-			endpoinrs.MapControllerRoute(
-				name: "post-by-Author",
-				pattern: "blog/Author/{slug}",
-				defaults: new { controller = "Blog", action = "Author" });
+			//endpoinrs.MapControllerRoute(
+			//	name: "post-by-Author",
+			//	pattern: "blog/Author/{slug}",
+			//	defaults: new { controller = "Blog", action = "Author" });
 
-			endpoinrs.MapControllerRoute(
-				name: "post-by-category",
-				pattern: "blog/category/{slug}",
-				defaults: new { controller = "Blog", action = "Category" });
+			//endpoinrs.MapControllerRoute(
+			//	name: "post-by-category",
+			//	pattern: "blog/category/{slug}",
+			//	defaults: new { controller = "Blog", action = "Category" });
 
-			endpoinrs.MapControllerRoute(
-				name: "post-by-tag",
-				pattern: "blog/tag/{slug}",
-				defaults: new { controller = "Blog", action = "Tag" });
+			//endpoinrs.MapControllerRoute(
+			//	name: "post-by-tag",
+			//	pattern: "blog/tag/{slug}",
+			//	defaults: new { controller = "Blog", action = "Tag" });
 
+			//endpoinrs.MapControllerRoute(
+			//	name: "single-post",
+			//	pattern: "blog/post/{year:int}/{month:int}/{day:int}/{slug}",
+			//	defaults: new { controller = "Blog", action = "Post" });
+
+			//endpoinrs.MapControllerRoute(
+			//	name: "default",
+			//	pattern: "{controller=Blog}/{action=Index}/{id?}");
 			endpoinrs.MapControllerRoute(
-				name: "single-post",
+				name: "Single-post",
 				pattern: "blog/post/{year:int}/{month:int}/{day:int}/{slug}",
 				defaults: new { controller = "Blog", action = "Post" });
-
+			endpoinrs.MapControllerRoute(
+				name: "admin-area",
+				pattern: "admin/{controller=Dashboard}/{action=Index}/{id?}",
+				defaults: new { area = "Admin" });
 			endpoinrs.MapControllerRoute(
 				name: "default",
 				pattern: "{controller=Blog}/{action=Index}/{id?}");
