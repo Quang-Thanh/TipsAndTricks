@@ -11,41 +11,45 @@ namespace TatBlog.WebApp.Extensions
 		//endpoint kết hợp với cá action trong các controller
 
 		public static IEndpointRouteBuilder UseBlogRoutes(
-			this IEndpointRouteBuilder endpoinrs)
+			this IEndpointRouteBuilder endpoint)
 		{
-			endpoinrs.MapControllerRoute(
+			endpoint.MapControllerRoute(
 				name: "post-by-Author",
 				pattern: "blog/Author/{slug}",
 				defaults: new { controller = "Blog", action = "Author" });
 
-			endpoinrs.MapControllerRoute(
+			endpoint.MapControllerRoute(
 				name: "post-by-category",
 				pattern: "blog/category/{slug}",
 				defaults: new { controller = "Blog", action = "Category" });
 
-			endpoinrs.MapControllerRoute(
+			endpoint.MapControllerRoute(
 				name: "post-by-tag",
 				pattern: "blog/tag/{slug}",
 				defaults: new { controller = "Blog", action = "Tag" });
 
-			endpoinrs.MapControllerRoute(
+			endpoint.MapControllerRoute(
 				name: "single-post",
 				pattern: "blog/post/{year:int}/{month:int}/{day:int}/{slug}",
 				defaults: new { controller = "Blog", action = "Post" });
 
-			endpoinrs.MapControllerRoute(
+			endpoint.MapControllerRoute(
 				name: "single-post",
 				pattern: "blog/post/{year:int}/{month:int}/{day:int}/{slug}",
 				defaults: new { controller = "Blog", action = "Post" });
-			endpoinrs.MapControllerRoute(
+			//endpoinrs.MapControllerRoute(
+			//	name: "admin-area",
+			//	pattern: "admin/{controller=Dashboard}/{action=Index}/{id?}",
+			//	defaults: new { area = "Admin" });
+			endpoint.MapControllerRoute(
 				name: "admin-area",
 				pattern: "admin/{controller=Dashboard}/{action=Index}/{id?}",
 				defaults: new { area = "Admin" });
-			endpoinrs.MapControllerRoute(
+			endpoint.MapControllerRoute(
 				name: "default",
 				pattern: "{controller=Blog}/{action=Index}/{id?}");
 
-			return endpoinrs;
+			return endpoint;
 		}
 	}
 }
