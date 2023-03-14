@@ -46,5 +46,8 @@ namespace TatBlog.Services.Blogs
         Task<IPagedList> GetPagedPostsAsync(
             PostQuery condition, int pageNumber, int pageSize,
             CancellationToken cancellationToken = default);
+        Task<IList<AuthorItem>> GetAuthorsAsync(
+
+        CancellationToken cancellationToken = default);
     }
 }
