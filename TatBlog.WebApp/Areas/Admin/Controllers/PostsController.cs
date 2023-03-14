@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MapsterMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using TatBlog.Core.DTO;
@@ -10,22 +11,18 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 	public class PostsController : Controller
 	{
 		private readonly IBlogRepository _blogRepository;
+		private readonly IMapper _mapper;
 
-		public PostsController(IBlogRepository blogRepository)
+		public PostsController(IBlogRepository blogRepository, IMapper mapper)
 		{
 			_blogRepository = blogRepository;
+			_mapper = mapper;
 		}
 
 		public async Task<IActionResult> Index(PostFilterModel model)
 		{
-			var postQuery = new PostQuery()
-			{
-				keyWord = model.Keyword,
-				categoryId = model.CategoryId,
-				authorId = model.AuthorId,
-				postYear = model.Year,
-				postMonth = model.Month
-			};
+			var postQuery = _mapper.Map<PostQuery>(model);
+			
 
 			ViewBag.PostsList = await _blogRepository
 				.GetPagedPostsAsync(postQuery, 1, 10);
