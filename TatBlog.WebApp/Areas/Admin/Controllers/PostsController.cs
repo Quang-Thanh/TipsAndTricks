@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using TatBlog.Core.DTO;
 using TatBlog.Core.Entities;
 using TatBlog.Services.Blogs;
+using TatBlog.Services.Media;
 using TatBlog.WebApp.Areas.Admin.Models;
 
 namespace TatBlog.WebApp.Areas.Admin.Controllers
@@ -12,11 +13,13 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 	public class PostsController : Controller
 	{
 		private readonly IBlogRepository _blogRepository;
+		private readonly IMediaManager _mediaManager;
 		private readonly IMapper _mapper;
 
-		public PostsController(IBlogRepository blogRepository, IMapper mapper)
+		public PostsController(IBlogRepository blogRepository, IMediaManager mediaManager, IMapper mapper)
 		{
 			_blogRepository = blogRepository;
+			_mediaManager = mediaManager;
 			_mapper = mapper;
 		}
 
@@ -115,6 +118,23 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 				post.Category = null;
 				post.ModifiedDate = DateTime.Now;
 			}
+
+			//Nếu người dùng có upload hình ảnh minh họa cho bài viết 
+			if (model.ImageFile?.Length > 0)
+			{
+				//Thì thực hiện việc lưu tập tin vào thư mục uploads
+				var newImagePath = await _mediaManager.SaveFileAsync(
+					model.ImageFile.OpenReadStream(),
+					model.ImageFile.FileName,
+					model.ImageFile.ContentType);
+
+				//Nếu lưu thành công, xóa tập tin hình ảnh cũ (nếu có)
+				if (!string.IsNullOrWhiteSpace(newImagePath))
+				{
+					await _mediaManager.DeleteFileAsync(post.ImageUrl);
+					post.ImageUrl = newImagePath;
+				}	
+			}	
 
 			await _blogRepository.CreateOrUpdatePostAsync(
 				post, model.GetSelectedTags());
