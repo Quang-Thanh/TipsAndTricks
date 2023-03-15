@@ -1,4 +1,6 @@
-﻿using MapsterMapper;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -71,24 +73,25 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
             });
         }
 
-		[HttpGet]
-		public async Task<IActionResult> Edit(int id = 0)
+		[HttpPost]
+		public async Task<IActionResult> Edit(
+			IValidator<PostEditModel> postValidator,
+			PostEditModel model)
 		{
-			//ID = 0 <=> thêm bài viết mới
-			//ID > 0 : Đọc dữ llieeuj của bài viết từ CSDL
-			var post = id > 0
-				? await _blogRepository.GetPostByIdAsync(id, true)
-				: null;
+			var validationResult = await postValidator.ValidateAsync(model);
 
-			//Tạo view model từ dữ liệu của bài viết
-			var model = post == null
-				? new PostEditModel()
-				: _mapper.Map<PostEditModel>(post);
+			if (!validationResult.IsValid) 
+			{
+				validationResult.AddToModelState(ModelState);
+			}
 
-			//Gán các giá trị khác cho view model
-			await PopulatePostEditModelAsync(model);
+			if (!ModelState.IsValid)
+			{
+				await PopulatePostEditModelAsync(model);
 
-			return View(model);
+				return View(model);
+			}
+			
 		}
 		[HttpPost]
 		public async Task<IActionResult> Edit(PostEditModel model)
