@@ -1,5 +1,7 @@
 ﻿using Mapster;
 using MapsterMapper;
+using TatBlog.Core.Entities;
+using TatBlog.WebApp.Areas.Admin.Models;
 
 namespace TatBlog.WebApp.Mapsters
 {
