@@ -333,6 +333,27 @@ namespace TatBlog.Services.Blogs
 			return post;
 		}
 
+        public async Task ChangeStatusPublishedOfPostAsyn(int id, 
+            CancellationToken cancellationToken = default)
+        {
+            var post = await _context.Set<Post>().FindAsync(id);
+
+            post.Published = !post.Published;
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task<bool> DeletePostAsync(int postId, CancellationToken cancellationToken = default)
+        {
+            var post = await _context.Set<Post>().FindAsync(postId);
+
+            if(!post.Published) return false;
+
+            _context.Set<Post>().Remove(post);
+            var rowsCount = await _context.SaveChangesAsync(cancellationToken);
+
+            return rowsCount > 0;
+        }
+
 		//public Task<IPagedList> GetPagedPostsAsync(PostQuery condition, int pageNumber, int pageSize, CancellationToken cancellationToken = default)
 		//{
 		//	throw new NotImplementedException();
