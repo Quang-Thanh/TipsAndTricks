@@ -15,12 +15,15 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 {
 	public class PostsController : Controller
 	{
+		private readonly ILogger<PostsController> _logger;
 		private readonly IBlogRepository _blogRepository;
 		private readonly IMediaManager _mediaManager;
 		private readonly IMapper _mapper;
 
-		public PostsController(IBlogRepository blogRepository, IMediaManager mediaManager, IMapper mapper)
+		public PostsController(ILogger<PostsController> logger, IBlogRepository blogRepository, 
+			IMediaManager mediaManager, IMapper mapper)
 		{
+			_logger = logger;
 			_blogRepository = blogRepository;
 			_mediaManager = mediaManager;
 			_mapper = mapper;
@@ -28,11 +31,17 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 
 		public async Task<IActionResult> Index(PostFilterModel model)
 		{
+			_logger.LogInformation("Tạo điều kiện truy vấn");
+
+			//sử dụng Mapster để tạo đối tượng
 			var postQuery = _mapper.Map<PostQuery>(model);
 
+			_logger.LogInformation("Lấy danh sách bài viết từ CSDL");
 
 			ViewBag.PostsList = await _blogRepository
 				.GetPagedPostsAsync(postQuery, 1, 10);
+
+			_logger.LogInformation("Chuẩn bị dữ liệu cho ViewModel");
 
 			await PopulatePostFilterModelAsync(model);
 			return View(model);
@@ -74,29 +83,28 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
             });
         }
 
-		//[HttpPost]
-		//public async Task<IActionResult> Edit(
-		//	IValidator<PostEditModel> postValidator,
-		//	PostEditModel)
-		//{
-		//	//ID = 0 <=> thêm bài viết mới
-		//	//ID > 0 : Đọc dữ llieeuj của bài viết từ CSDL
-		//	var post = id > 0
-		//		? await _blogRepository.GetPostByIdAsync(id, true)
-		//		: null;
+		[HttpGet]
+		public async Task<IActionResult> Edit(int id = 0)
+		{
+			//ID = 0 <=> thêm bài viết mới
+			//ID > 0 : Đọc dữ llieeuj của bài viết từ CSDL
+			var post = id > 0
+				? await _blogRepository.GetPostByIdAsync(id, true)
+				: null;
 
-		//	//Tạo view model từ dữ liệu của bài viết
-		//	var model = post == null
-		//		? new PostEditModel()
-		//		: _mapper.Map<PostEditModel>(post);
+			//Tạo view model từ dữ liệu của bài viết
+			var model = post == null
+				? new PostEditModel()
+				: _mapper.Map<PostEditModel>(post);
 
-		//	//Gán các giá trị khác cho view model
-		//	await PopulatePostEditModelAsync(model);
+			//Gán các giá trị khác cho view model
+			await PopulatePostEditModelAsync(model);
 
-		//	return View(model);
-		//}
+			return View(model);
+		}
 		[HttpPost]
-		public async Task<IActionResult> Edit(IValidator<PostEditModel> postValidator, PostEditModel model)
+		public async Task<IActionResult> Edit(
+			[FromServices] IValidator<PostEditModel> postValidator, PostEditModel model)
 		{
 			var validationResult = await postValidator.ValidateAsync(model);
 			if (!validationResult.IsValid) 

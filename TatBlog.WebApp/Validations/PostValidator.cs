@@ -19,7 +19,7 @@ namespace TatBlog.WebApp.Validations
 			RuleFor(x => x.ShortDescription)
 				.NotEmpty();
 
-			RuleFor(x => x.Desciption)
+			RuleFor(x => x.Description)
 				.NotEmpty();
 
 			RuleFor(x => x.Meta)

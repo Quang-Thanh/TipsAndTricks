@@ -15,7 +15,7 @@ namespace TatBlog.Core.Entities
 
         public string ShortDescription { get; set; }
 
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         public string Meta { get; set; }
 

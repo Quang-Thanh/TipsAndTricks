@@ -25,7 +25,7 @@ namespace TatBlog.WebApp.Areas.Admin.Models
         //[Required(ErrorMessage = "Nội dung không được để trống")]
         //[MaxLength(5000, ErrorMessage = "Nội dung tối đa 5000 ký tự")]
 
-        public string Desciption { get; set; }
+        public string Description { get; set; }
 
         [DisplayName("Metadata")]
         //[Required(ErrorMessage ="Metadata không được để trống")]
@@ -34,8 +34,8 @@ namespace TatBlog.WebApp.Areas.Admin.Models
         public string Meta { get; set; }
 
         [DisplayName("Slug")]
-        [Remote("VerifyPostSlug", "Posts", "Admin",
-            HttpMethod = " POST", AdditionalFields = "Id")]
+        //[Remote("VerifyPostSlug", "Posts", "Admin",
+        //    HttpMethod = " POST", AdditionalFields = "Id")]
         //[Required(ErrorMessage = "URL slug không được để trống")]
         //[MaxLength(200, ErrorMessage = "Slug tối đa 200 ký tự")]
 
