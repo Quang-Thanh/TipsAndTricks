@@ -2,21 +2,11 @@
 
 @{
 	var postQuery = (ViewBag.PostQuery as PostQuery) ?? new PostQuery();
+	var controller = "Posts"; 
 	var actionName = "Index";
 	var slug = "";
 
-	if (!string.IsNullOrWhiteSpace(postQuery.AuthorSlug))
-	{
-		actionName = "Author";
-	}
-	else if (!string.IsNullOrWhiteSpace(postQuery.CategorySlug))
-	{
-		actionName = "Category";
-	}
-	else if (!string.IsNullOrWhiteSpace(postQuery.TagSlug))
-	{
-		actionName = "Tag";
-	}
+	
 }
 
 @if (Model.PagedCount > 1)
@@ -24,7 +14,7 @@
 	<div class="text-center my-4">
 		@if (Model.HasPreviosPage)
 		{
-			<a asp-controller="Blog"
+			<a asp-controller="@controller"
 				asp-action="@actionName"
 				asp-route-slug="@slug"
 				asp-route-k="@postQuery.keyWord"
@@ -46,7 +36,7 @@
 
 		@if (Model.HasNextPage)
 		{
-			<a asp-controller="Blog"
+			<a asp-controller="@controller"
 				asp-action="@actionName"
 				asp-route-slug="@slug"
 				asp-route-k="@postQuery.keyWord"

@@ -29,8 +29,9 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 			_mapper = mapper;
 		}
 
-		public async Task<IActionResult> Index(PostFilterModel model,
-             [FromQuery(Name = "p")] int pageNumber = 1,
+		public async Task<IActionResult> Index(
+			PostFilterModel model,
+            [FromQuery(Name = "p")] int pageNumber = 1,
             [FromQuery(Name = "ps")] int pageSize = 5
             )
 		{

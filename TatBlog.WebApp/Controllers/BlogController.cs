@@ -100,6 +100,13 @@ namespace TatBlog.WebApp.Controllers
 			return View(postsList);
 		}
 
+		public async Task<IActionResult> Post(
+			string slug, int month, int year)
+		{
+			var post = await _blogRepository.GetPostAsync(year, month, slug);
+
+			return View(post);
+		}
 		//public IActionResult Index()
 		//{
 		//    ViewBag.CurrentTime = DateTime.Now.ToString("HH:mm:ss");

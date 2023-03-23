@@ -15,8 +15,9 @@
         public async Task Invoke(HttpContext context)
         {
             _logger.LogInformation(
-                "{Time:yyyy-MM-dd HH:mm:ss} - IP: {IpAddress} - Path: {Url}"
-                , DateTime.Now, context.Connection.RemoteIpAddress?.ToString(),
+                "{Time:yyyy-MM-dd HH:mm:ss} - IP: {IpAddress} - Path: {Url}", 
+                DateTime.Now, 
+                context.Connection.RemoteIpAddress?.ToString(),
                 context.Request.Path);
 
             await _next(context);
