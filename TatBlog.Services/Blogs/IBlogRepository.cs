@@ -65,5 +65,14 @@ namespace TatBlog.Services.Blogs
             CancellationToken cancellationToken = default);
 
         Task<bool> DeletePostAsync(int postId, CancellationToken cancellationToken = default);
-    }
+
+        Task<IList<Post>> GetFeaturePostAysnc(
+          int numberPost,
+          CancellationToken cancellationToken = default);
+        Task<IList<Post>> GetRandomArticlesAsync(
+        int numPosts, CancellationToken cancellationToken = default);
+
+        
+
+	}
 }

@@ -355,6 +355,58 @@ namespace TatBlog.Services.Blogs
             return rowsCount > 0;
         }
 
+		public async Task<IList<Post>> GetFeaturePostAysnc(
+		  int numberPost,
+		  CancellationToken cancellationToken = default)
+		{
+
+			return await _context.Set<Post>()
+				.Include(x => x.Category)
+				.Include(x => x.Author)
+				.Include(x => x.Tags)
+				.OrderByDescending(x => x.ViewCout)
+				.Take(numberPost)
+				.ToListAsync(cancellationToken);
+		}
+
+		public async Task<IList<Post>> GetRandomArticlesAsync(
+		int numPosts, CancellationToken cancellationToken = default)
+		{
+			return await _context.Set<Post>()
+				.OrderBy(x => Guid.NewGuid())
+				.Take(numPosts)
+				.ToListAsync(cancellationToken);
+		}
+
+        //tagcloud
+		//public async Task<IList<CategoryItem>> GetTagCloudAsync(
+		////bool showOnMenu = false,
+		//CancellationToken cancellationToken = default)
+		//{
+		//	IQueryable<Tag> tagcloud = _context.Set<Tag>();
+
+		//	//if (showOnMenu)
+		//	//{
+		//	//	tagcloud = tagcloud.Where(x => x.ShowOnMenu);
+		//	//}
+
+		//	return await tagcloud
+		//		.OrderBy(x => x.Name)
+		//		.Select(x => new Tag()
+		//		{
+		//			Id = x.Id,
+		//			Name = x.Name,
+		//			UrlSlug = x.UrlSlug,
+		//			Description = x.Description,
+		//			//ShowOnMenu = x.ShowOnMenu,
+		//			//PostCount = x.Posts.Count(p => p.Published)
+		//		})
+		//		.ToListAsync(cancellationToken);
+		//}
+
+
+
+
 		//public Task<IPagedList> GetPagedPostsAsync(PostQuery condition, int pageNumber, int pageSize, CancellationToken cancellationToken = default)
 		//{
 		//	throw new NotImplementedException();
