@@ -3,21 +3,21 @@ using TatBlog.Services.Blogs;
 
 namespace TatBlog.WebApp.Components
 {
-	public class TagCloud : ViewComponent
+	public class BestAuthors : ViewComponent
 	{
 		private readonly IBlogRepository _blogRepositry;
 
-		public TagCloud(IBlogRepository blogRepositry)
+		public BestAuthors(IBlogRepository blogRepositry)
 		{
 			_blogRepositry = blogRepositry;
 		}
 
 		public async Task<IViewComponentResult> InvokeAsync()
 		{
-			//Hiển thị danh sách thẻ tag (còn làm trong blogreponsi với iblogrepon)
-			var tagCloud = await _blogRepositry.GetTagsAsync();
+			//Hiện thị top 4 tác giả
+			var authors = await _blogRepositry.GetAuthorsAsync();
 
-			return View(tagCloud);
+			return View(authors);
 		}
 	}
 }

@@ -378,31 +378,7 @@ namespace TatBlog.Services.Blogs
 				.ToListAsync(cancellationToken);
 		}
 
-        //tagcloud
-		//public async Task<IList<CategoryItem>> GetTagCloudAsync(
-		////bool showOnMenu = false,
-		//CancellationToken cancellationToken = default)
-		//{
-		//	IQueryable<Tag> tagcloud = _context.Set<Tag>();
-
-		//	//if (showOnMenu)
-		//	//{
-		//	//	tagcloud = tagcloud.Where(x => x.ShowOnMenu);
-		//	//}
-
-		//	return await tagcloud
-		//		.OrderBy(x => x.Name)
-		//		.Select(x => new Tag()
-		//		{
-		//			Id = x.Id,
-		//			Name = x.Name,
-		//			UrlSlug = x.UrlSlug,
-		//			Description = x.Description,
-		//			//ShowOnMenu = x.ShowOnMenu,
-		//			//PostCount = x.Posts.Count(p => p.Published)
-		//		})
-		//		.ToListAsync(cancellationToken);
-		//}
+		
 
 
 

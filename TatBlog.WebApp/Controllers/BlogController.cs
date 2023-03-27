@@ -107,6 +107,35 @@ namespace TatBlog.WebApp.Controllers
 
 			return View(post);
 		}
+
+		public async Task<IActionResult> Tag(
+			string slug,
+			[FromQuery(Name = "p")] int pageNumber = 1,
+			[FromQuery(Name = "ps")] int pageSize = 10)
+		{
+			//tạo đối tượng chưa các điều kiện truy vấn
+			var postQuery = new PostQuery()
+			{
+				//chỉ lấy những bài viết có trạng thái Published
+				PublishedOnly = true,
+
+				//Tìm bài viết theo từ khóa
+				TagSlug = slug,
+			};
+
+			//truy vấn các bài viết theo điều kiện đã tạo
+			var postsList = await _blogRepository
+				.GetPagedPostsAsync(postQuery, pageNumber, pageSize);
+
+			var Tag = await _blogRepository
+				.GetTagFromSlugAsync(slug);
+
+			//Lưu lại điều kiện truy vấn để hiển thị trong View
+			ViewBag.NameTag = Tag.Name;
+
+			//Truyền danh sách bài viết vào View để rander ra HTMl
+			return View(postsList);
+		}
 		//public IActionResult Index()
 		//{
 		//    ViewBag.CurrentTime = DateTime.Now.ToString("HH:mm:ss");

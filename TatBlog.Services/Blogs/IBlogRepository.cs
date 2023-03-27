@@ -72,7 +72,8 @@ namespace TatBlog.Services.Blogs
         Task<IList<Post>> GetRandomArticlesAsync(
         int numPosts, CancellationToken cancellationToken = default);
 
-        
+        Task<IList<TagItem>> GetTagsAsync(
+            CancellationToken cancellationToken = default);
 
 	}
 }

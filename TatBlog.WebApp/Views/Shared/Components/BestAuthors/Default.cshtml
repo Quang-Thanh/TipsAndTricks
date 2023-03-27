@@ -1,8 +1,8 @@
-﻿@model IList<TagItem>
+﻿@model IList<AuthorItem>
 
 <div class="mb-4">
 	<h3 class="text-success mb-2">
-		Tag Cloud
+		Top tác giả
 	</h3>
 
 	<ul class="list-group">
@@ -10,10 +10,11 @@
 		{
 			<li class="list-group-item">
 				<a asp-controller="Blog"
-					asp-action="Tag"
+					asp-action="Author"
 					asp-route-slug="@item.UrlSlug"
 					title=".Name">
-					<span > @item.Name</span>
+					<span > @item.FullName</span>
+					<span>(@item.PostCount)</span>
 				</a>
 					
 			</li>
