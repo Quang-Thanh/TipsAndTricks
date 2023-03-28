@@ -1,6 +1,7 @@
 using TagBlog.WebApi.Extensions;
 using TagBlog.WebApi.Mapsters;
 using TagBlog.WebApi.Extensions;
+using TagBlog.WebApi.Validations;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -10,7 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 		.ConfigureNLog()
 		.ConfigureServices()
 		.ConfigureSwaggerOpenApi()
-		.ConfigureMapster();
+		.ConfigureMapster()
+		.ConfigureFluentValidation();
 }
 
 var app = builder.Build();
