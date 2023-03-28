@@ -22,8 +22,7 @@ namespace TatBlog.Data.Contexts
         protected override void OnConfiguring(
             DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"server=quang-thanh\sqlexpress;database=tatblog;
-                trusted_connection=true;multipleactiveresultsets=true;trustservercertificate=true");
+            optionsBuilder.UseSqlServer(@"server=quang-thanh\sqlexpress;database=tatblog; trusted_connection=true;multipleactiveresultsets=true;trustservercertificate=true");
         }
 
         //protected override void onmodelcreating(modelbuilder modelbuilder)

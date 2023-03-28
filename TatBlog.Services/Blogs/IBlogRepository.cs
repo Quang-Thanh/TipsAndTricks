@@ -40,15 +40,15 @@ namespace TatBlog.Services.Blogs
 
         Task<Tag> GetTagFromSlugAsync(string slug, CancellationToken cancellationToken = default);
         Task<Category> GetCategoryFromSlugAsync(string slug, CancellationToken cancellationToken = default);
-        Task<Author> GetAuthorFromSlugAsync(string slug, CancellationToken cancellationToken = default);
+        //Task<Author> GetAuthorFromSlugAsync(string slug, CancellationToken cancellationToken = default);
 
         //Phần9 --> Lab01S
         Task<IPagedList> GetPagedPostsAsync(
             PostQuery condition, int pageNumber, int pageSize,
             CancellationToken cancellationToken = default);
-        Task<IList<AuthorItem>> GetAuthorsAsync(
+        //Task<IList<AuthorItem>> GetAuthorsAsync(
 
-        CancellationToken cancellationToken = default);
+        //CancellationToken cancellationToken = default);
 
         Task<Post> GetPostByIdAsync(
         int postId, bool includeDetails = false,
