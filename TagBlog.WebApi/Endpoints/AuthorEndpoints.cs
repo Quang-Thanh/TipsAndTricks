@@ -4,6 +4,7 @@ using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using TagBlog.WebApi.Extensions;
+using TagBlog.WebApi.Filters;
 using TagBlog.WebApi.Models;
 using TatBlog.Core.Collections;
 using TatBlog.Core.DTO;
@@ -37,6 +38,7 @@ namespace TagBlog.WebApi.Endpoints
 
 			routeGroupBuilder.MapPost("/", AddAuthor)
 				.WithName("AddNewAuthor")
+				.AddEndpointFilter<ValidatorFilter<AuthorEditModel>>()
 				.Produces(201)
 				.Produces(400)
 				.Produces(409);
@@ -49,6 +51,7 @@ namespace TagBlog.WebApi.Endpoints
 
 			routeGroupBuilder.MapPut("/{id:int}", UpdateAuthor)
 				.WithName("UpdateAnAuthor")
+				.AddEndpointFilter<ValidatorFilter<AuthorEditModel>>()
 				.Produces(204)
 				.Produces(400)
 				.Produces(409);
@@ -127,20 +130,11 @@ namespace TagBlog.WebApi.Endpoints
 
 		private static async Task<IResult> AddAuthor(
 			AuthorEditModel model,
-			IValidator<AuthorEditModel> validator,
 			IAuthorRepository authorRepository,
 			IMapper mapper)
 		{
-			var validationResult = await validator.ValidateAsync(model);
-
-			if (!validationResult.IsValid)
-			{
-				return Results.BadRequest(
-					validationResult.Errors.ToResponse());
-			}
-
-			if (await authorRepository.IsAuthorSlugExistedAsync(
-				0, model.UrlSlug))
+			if (await authorRepository
+				.IsAuthorSlugExistedAsync(0, model.UrlSlug))
 			{
 				return Results.Conflict(
 					$"Slug '{model.UrlSlug}' đã được sử dụng");
@@ -174,20 +168,11 @@ namespace TagBlog.WebApi.Endpoints
 
 		private static async Task<IResult> UpdateAuthor(
 			int id, AuthorEditModel model,
-			IValidator<AuthorEditModel> validator,
 			IAuthorRepository authorRepository,
 			IMapper mapper)
 		{
-			var validationResult = await validator.ValidateAsync(model);
-
-			if (!validationResult.IsValid)
-			{
-				return Results.BadRequest(
-					validationResult.Errors.ToResponse());
-			}
-
-			if (await authorRepository.IsAuthorSlugExistedAsync
-				(id, model.UrlSlug))
+			if (await authorRepository
+				.IsAuthorSlugExistedAsync(id, model.UrlSlug))
 			{
 				return Results.Conflict(
 					$"Slug '{model.UrlSlug}' đã được sử dụng");
