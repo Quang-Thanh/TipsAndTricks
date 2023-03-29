@@ -20,13 +20,13 @@ namespace TagBlog.WebApi.Extensions
 				.GetConnectionString("DefaultConnection")));
 
 			builder.Services
-				.AddScoped<ITimeProvider, ITimeProvider>();
+				.AddScoped<ITimeProvider, LocalTimeProvider>();
 			builder.Services
 				.AddScoped<IMediaManager, LocalFileSystemMediaManager>();
 			builder.Services
 				.AddScoped<IBlogRepository, BlogRepository>();
 			builder.Services
-				.AddScoped<IAuthorRepository, IAuthorRepository>();
+				.AddScoped<IAuthorRepository, AuthorRepository>();
 			return builder;
 		}
 
