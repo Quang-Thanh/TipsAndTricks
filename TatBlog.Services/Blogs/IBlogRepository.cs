@@ -79,5 +79,38 @@ namespace TatBlog.Services.Blogs
             PostQuery query, IPagingParams pagingParams, 
             Func<IQueryable<Post>, IQueryable<T>> mapper, CancellationToken cancellationToken = default);
 
+        //category API
+        Task<IPagedList<CategoryItem>> GetPagedCategoriesAsync(
+        IPagingParams pagingParams,
+        string name = null,
+        CancellationToken cancellationToken = default);
+
+        Task<Category> GetCategoryBySlugAsync(
+            string slug, CancellationToken cancellationToken = default);
+
+        Task<Category> GetCachedCategoryBySlugAsync(
+            string slug, CancellationToken cancellationToken = default);
+
+        Task<Category> GetcategoryByIdAsync(int categoryId);
+
+        Task<Category> GetCachedCategoryByIdAsync(int categoryId);
+
+        Task<IPagedList<T>> GetPagedCategoriesAsync<T>(
+            Func<IQueryable<Category>, IQueryable<T>> mapper,
+                IPagingParams pagingParams,
+                string name = null,
+                CancellationToken cancellationToken = default);
+
+        Task<bool> AddOrUpdateAsync(
+            Category category, CancellationToken cancellationToken = default);
+
+        Task<bool> DeleteCategoryAsync(
+            int categoryId, CancellationToken cancellation = default);
+
+        Task<bool> IsCategorySlugExistedAsync(
+            int categoryId,
+            string slug,
+            CancellationToken cancellation = default);
+
 	}
 }

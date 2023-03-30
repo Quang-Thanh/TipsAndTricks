@@ -45,7 +45,6 @@ namespace TagBlog.WebApi.Endpoints
 			routeGroupBuilder.MapPost("/", AddAuthor)
 				.WithName("AddNewAuthor")
 				.AddEndpointFilter<ValidatorFilter<AuthorEditModel>>()
-				.RequireAuthorization()
 				//.Produces(201)
 				//.Produces(400)
 				.Produces(401)
@@ -53,20 +52,17 @@ namespace TagBlog.WebApi.Endpoints
 
 			routeGroupBuilder.MapPost("/{id:int}/picture", SetAuthorPicture)
 				.WithName("SetAuthorPicture")
-				.RequireAuthorization()
 				.Accepts<IFormFile>("multipart/form-data")
 				.Produces(401)
 				.Produces<ApiResponse<string>>();
 
 			routeGroupBuilder.MapPut("/{id:int}", UpdateAuthor)
 				.WithName("UpdateAnAuthor")
-				.RequireAuthorization()
 				.Produces(401)
 				.Produces<ApiResponse<string>>();
 
 			routeGroupBuilder.MapDelete("/{id:int}", DeleteAuthor)
 				.WithName("DeleteAnAuthor")
-				.RequireAuthorization()
 				.Produces(401)
 				.Produces<ApiResponse<string>>();
 
