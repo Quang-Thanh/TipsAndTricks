@@ -36,7 +36,7 @@ namespace TagBlog.WebApi.Endpoints
 				.Produces<ApiResponse<PaginationResult<PostDto>>>();
 
 			routeGroupBuilder.MapPost("/", AddCategory)
-				.WithName("AddNewAuthor")
+				.WithName("AddNewCategory")
 				.AddEndpointFilter<ValidatorFilter<CategoryEditModel>>()
 				.Produces(401)
 				.Produces<ApiResponse<CategoryItem>>();
