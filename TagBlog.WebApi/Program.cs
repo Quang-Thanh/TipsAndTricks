@@ -27,6 +27,12 @@ var app = builder.Build();
 	//CategoryEndponit
 	app.MapCategoryEndPoints();
 
+	//PostEndpoint
+	app.MapPostEndpoints();
+
+	//TagEndpoint
+	app.MapTagEndpoint();
+
 	app.Run();
 }
 

@@ -1,0 +1,27 @@
+﻿namespace TagBlog.WebApi.Models
+{
+	public class PostEditModel
+	{
+		public int Id { get; set; }
+
+		public string Title { get; set; }
+
+		public string ShortDescription { get; set; }
+
+		public string? Description { get; set; }
+
+		public string Meta { get; set; }
+
+		public string UrlSlug { get; set; }
+
+		public string ImageUrl { get; set; }
+
+		public int ViewCout { get; set; }
+
+		public bool Published { get; set; }
+
+		public DateTime PostedDate { get; set; }
+
+		public DateTime? ModifiedDate { get; set; }
+	}
+}

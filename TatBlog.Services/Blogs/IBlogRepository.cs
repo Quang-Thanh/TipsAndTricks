@@ -36,6 +36,7 @@ namespace TatBlog.Services.Blogs
 
         Task<IPagedList<TagItem>> GetPagedTagsAsync(
         IPagingParams pagingParams,
+        string name,
         CancellationToken cancellationToken = default);
 
         Task<Tag> GetTagFromSlugAsync(string slug, CancellationToken cancellationToken = default);
@@ -111,6 +112,64 @@ namespace TatBlog.Services.Blogs
             int categoryId,
             string slug,
             CancellationToken cancellation = default);
+
+        //post API
+        Task<Post> GetPostBySlugAsync(
+        string slug, CancellationToken cancellationToken = default);
+
+        Task<Post> GetCachedPostBySlugAsync(
+        string slug, CancellationToken cancellationToken = default);
+
+        Task<Post> GetPostByIdAsync(int postId);
+
+        Task<Post> GetCachedPostByIdAsync(int postId);
+
+        Task<IList<Post>> GetPostsAsync(
+        PostQuery condition,
+        int pageNumber,
+        int pageSize,
+        CancellationToken cancellationToken = default);
+
+        Task<IPagedList<T>> GetPagedPostsAsync<T>(
+        Func<IQueryable<Post>, IQueryable<T>> mapper,
+        IPagingParams pagingParams,
+        string name = null,
+        CancellationToken cancellationToken = default);
+
+        Task<bool> AddOrUpdateAsync(
+        Post post, CancellationToken cancellationToken = default);
+
+        Task<bool> SetImageUrlAsync(
+        int postId, string imageUrl,
+        CancellationToken cancellationToken = default);
+
+        //tag
+        Task<Tag> GetTagBySlugAsync(
+        string slug, CancellationToken cancellationToken = default);
+
+        Task<Tag> GetCachedTagBySlugAsync(
+        string slug, CancellationToken cancellationToken = default);
+
+        Task<Tag> GetTagByIdAsync(int tagId);
+
+        Task<Tag> GetCachedTagByIdAsync(int tagId);
+
+        Task<IPagedList<T>> GetPagedTagsAsync<T>(
+        Func<IQueryable<Tag>, IQueryable<T>> mapper,
+        IPagingParams pagingParams,
+        string name = null,
+        CancellationToken cancellationToken = default);
+
+        Task<bool> AddOrUpdateAsync(
+        Tag tag, CancellationToken cancellationToken = default);
+
+        Task<bool> DeleteTagAsync(
+        int tagId, CancellationToken cancellationToken = default);
+
+        Task<bool> IsTagSlugExistedAsync(
+        int tagId,
+        string slug,
+        CancellationToken cancellationToken = default);
 
 	}
 }

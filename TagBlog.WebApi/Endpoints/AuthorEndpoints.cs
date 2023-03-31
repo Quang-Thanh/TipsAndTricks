@@ -26,27 +26,21 @@ namespace TagBlog.WebApi.Endpoints
 
 			routeGroupBuilder.MapGet("/", GetAuthors)
 				.WithName("GetAuthors")
-				//.Produces<PaginationResult<AuthorItem>>();
 				.Produces<ApiResponse<PaginationResult<AuthorItem>>>();
 
 			routeGroupBuilder.MapGet("/{id:int}", GetAuthorDetails)
 				.WithName("GetAuthorById")
-				//.Produces<AuthorItem>()
-				//.Produces(404);
 				.Produces<ApiResponse<AuthorItem>>();
 
 			routeGroupBuilder.MapGet(
 				"/{slug:regex(^[a-z0-9 -]+$)}/posts",
 				GetPostsByAuthorSlug)
 				.WithName("GetPostsByAuthorSlug")
-				//.Produces<PaginationResult<PostDto>>();
 				.Produces<ApiResponse<PaginationResult<PostDto>>>();
 
 			routeGroupBuilder.MapPost("/", AddAuthor)
 				.WithName("AddNewAuthor")
 				.AddEndpointFilter<ValidatorFilter<AuthorEditModel>>()
-				//.Produces(201)
-				//.Produces(400)
 				.Produces(401)
 				.Produces<ApiResponse<AuthorItem>>();
 
