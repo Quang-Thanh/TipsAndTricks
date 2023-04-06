@@ -3,6 +3,9 @@ import React from "react";
 const Sidebar = () => {
   return (
     <div className='pt-4 ps-2'>
+
+      <SearchFrom />
+
       <h1>
         Tìm kiếm bài viết
       </h1>
