@@ -42,7 +42,9 @@ const Index = () => {
             <PostItem postItem={item} key={index} />
           );
         })}
-        <Pager postquery={{ 'keyword' : k }} metadata={metadata} />
+
+        <Pager postquery={{ k }} metadata={metadata} />
+        {/* <Pager postquery={{ 'keyword' : k }} metadata={metadata} /> */}
       </div>
     );
   else return (

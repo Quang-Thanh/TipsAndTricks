@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-const searchForm = () => {
+const SearchForm = () => {
   const [keyword, setKeyword] = useState('');
 
   const handleSubmit = (e) => {
@@ -36,4 +36,4 @@ const searchForm = () => {
   );
 }
 
-export default searchForm;
+export default SearchForm;

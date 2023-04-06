@@ -4,6 +4,7 @@ import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import Button from "react-bootstrap/Button";
 
 const Pager = ({ postQuery, metadata }) => {
+  console.log(postQuery);
 
   let pageCount = metadata.pageCount,
     hasNextPage = metadata.hasNextPage,

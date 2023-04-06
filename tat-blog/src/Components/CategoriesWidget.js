@@ -3,7 +3,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { Link } from "react-router-dom";
 import { getCategories } from "../Services/Widgets";
 
-const categoriesWidget = () => {
+const CategoriesWidget = () => {
   const [categoryList, setCategoryList] = useState ([]);
 
   useEffect(() => {
@@ -40,4 +40,4 @@ const categoriesWidget = () => {
   );
 }
 
-export default categoriesWidget;
+export default CategoriesWidget;

@@ -1,10 +1,15 @@
 import React from "react";
+import SearchFrom from './SearchForm';
+import CategoriesWidget from "./CategoriesWidget";
+
 
 const Sidebar = () => {
   return (
     <div className='pt-4 ps-2'>
 
       <SearchFrom />
+
+      <CategoriesWidget />
 
       <h1>
         Tìm kiếm bài viết
