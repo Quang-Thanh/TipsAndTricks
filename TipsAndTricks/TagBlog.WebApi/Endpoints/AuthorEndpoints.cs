@@ -33,14 +33,14 @@ namespace TagBlog.WebApi.Endpoints
 				.Produces<ApiResponse<AuthorItem>>();
 
 			routeGroupBuilder.MapGet(
-				"/{slug:regex(^[a-z0-9 -]+$)}/posts",
+				"/{slug:regex(^[a-z0-9_-]+$)}/posts",
 				GetPostsByAuthorSlug)
 				.WithName("GetPostsByAuthorSlug")
 				.Produces<ApiResponse<PaginationResult<PostDto>>>();
 
 			routeGroupBuilder.MapPost("/", AddAuthor)
-				.WithName("AddNewAuthor")
 				.AddEndpointFilter<ValidatorFilter<AuthorEditModel>>()
+				.WithName("AddNewAuthor")
 				.Produces(401)
 				.Produces<ApiResponse<AuthorItem>>();
 
@@ -84,12 +84,12 @@ namespace TagBlog.WebApi.Endpoints
 			var author = await authorRepository.GetCachedAuthorByIdAsync(id);
 
 			return author == null
-				? Results.Ok(ApiResponse.Fail(System.Net.HttpStatusCode.NotFound,
+				? Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound,
 				$"Không tìm thấy tác giả có mã số {id}"))
 				: Results.Ok(ApiResponse.Success(mapper.Map<AuthorItem>(author)));
 		}
 
-		private static async Task<IResult> GetPostsByAuthorId(
+		private static async Task<IResult> GetPostsByAuthor(
 			int id,
 			[AsParameters] PagingModel pagingModel,
 			IBlogRepository blogRepository)

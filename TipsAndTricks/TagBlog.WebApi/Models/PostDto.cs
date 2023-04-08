@@ -27,6 +27,8 @@ namespace TagBlog.WebApi.Models
 
 		//Ngày giờ cập nhật lần cuối
 		public DateTime? ModifiedDate { get; set; }
+
+		public bool Published { get; set; }
 		
 		//Chuyên mục bài viết
 		public	CategoryDto Category { get; set; }

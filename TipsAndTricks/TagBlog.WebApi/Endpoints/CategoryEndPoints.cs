@@ -21,9 +21,13 @@ namespace TagBlog.WebApi.Endpoints
 		{
 			var routeGroupBuilder = app.MapGroup("/api/categories");
 
-			routeGroupBuilder.MapGet("/", GetCategory)
-				.WithName("GetCategory")
+			routeGroupBuilder.MapGet("/", GetCategories)
+				.WithName("GetCategories")
 				.Produces<ApiResponse<PaginationResult<CategoryItem>>>();
+
+			//routeGroupBuilder.MapGet("/", GetCategory)
+			//	.WithName("GetCategory")
+			//	.Produces<ApiResponse<PaginationResult<CategoryItem>>>();
 
 			routeGroupBuilder.MapGet("/{id:int}", GetCategoryDetails)
 				.WithName("GetCategoryById")
@@ -64,6 +68,13 @@ namespace TagBlog.WebApi.Endpoints
 			var paginationResult = new PaginationResult<CategoryItem>(categoriesList);
 
 			return Results.Ok(ApiResponse.Success(paginationResult));
+		}
+
+		private static async Task<IResult> GetCategories(
+			IBlogRepository blogRepository)
+		{
+			var categories = await blogRepository.GetCategoriesAsync();
+			return Results.Ok(ApiResponse.Success(categories));
 		}
 
 		private static async Task<IResult> GetCategoryDetails(
@@ -177,6 +188,8 @@ namespace TagBlog.WebApi.Endpoints
 				HttpStatusCode.NoContent))
 				: Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound, "Could not find category"));
 		}
+
+		
 
 	}
 }

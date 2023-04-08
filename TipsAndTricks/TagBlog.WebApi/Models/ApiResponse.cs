@@ -2,6 +2,7 @@
 using Microsoft.Identity.Client;
 using System.ComponentModel;
 using System.Net;
+using TagBlog.WebApi.Models;
 
 namespace TagBlog.WebApi.Models
 {
@@ -45,7 +46,7 @@ namespace TagBlog.WebApi.Models
 			HttpStatusCode statusCode,
 			params string[] errorMessages)
 		{
-			if (errorMessages == null || errorMessages.Length == 0)
+			if (errorMessages is null or { Length: 0 })
 			{
 				throw new ArgumentException(nameof(errorMessages));
 			}
@@ -67,4 +68,10 @@ namespace TagBlog.WebApi.Models
 				.ToArray());
 		}
 	}
+
+}
+
+public class ApiResponse<T> : ApiResponse
+{
+	public T Result { get; set; }
 }
