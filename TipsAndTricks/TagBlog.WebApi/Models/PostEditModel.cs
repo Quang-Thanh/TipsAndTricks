@@ -17,6 +17,10 @@ namespace TagBlog.WebApi.Models
 		[DisplayName("Giới thiệu")]
 		[Required]
 
+		//test
+		//public string keywork { get; set; }
+		//[DisplayName("Từ khóa")]
+		//[Required]
 
 		public string UrlSlug { get; set; }
 		[Required]

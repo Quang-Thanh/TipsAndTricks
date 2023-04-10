@@ -28,7 +28,7 @@ namespace TatBlog.WebApp.Controllers
                 PublishedOnly = true,
 
                 //Tìm bài viết theo từ khóa
-                keyWord = keyWord
+                keyword = keyWord
             };
 
             //truy vấn các bài viết theo điều kiện đã tạo

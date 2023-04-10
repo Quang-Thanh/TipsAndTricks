@@ -43,7 +43,7 @@ const Index = () => {
           );
         })}
 
-        <Pager postquery={{ k }} metadata={metadata} />
+        <Pager postquery={{ 'keyword' : k }} metadata={metadata} />
         {/* <Pager postquery={{ 'keyword' : k }} metadata={metadata} /> */}
       </div>
     );

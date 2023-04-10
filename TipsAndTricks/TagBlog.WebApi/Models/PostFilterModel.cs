@@ -9,7 +9,7 @@ namespace TagBlog.WebApi.Models
 		//public string Name { get; set; }
 
 		[DisplayName("Từ khóa")]
-		public string Keyword { get; set; }
+		public string keyword { get; set; }
 
 		[DisplayName("Tác giả")]
 		public int? AuthorId { get; set; }

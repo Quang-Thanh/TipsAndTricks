@@ -106,7 +106,7 @@ namespace TagBlog.WebApi.Endpoints
 		{
 			var postQuery = new PostQuery()
 			{
-				keyWord = model.Keyword,
+				keyword = model.keyword,
 				categoryId = model.CategoryId,
 				authorId = model.AuthorId,
 				postYear = model.Year,

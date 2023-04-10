@@ -14,7 +14,7 @@ namespace TatBlog.Core.DTO
 
 		public string categoryName { get; set; }
 
-		public string keyWord { get; set; }
+		public string keyword { get; set; }
 
 		public int? postMonth { get; set; }
 
