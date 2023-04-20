@@ -58,13 +58,13 @@ namespace TagBlog.WebApi.Endpoints
 				.Produces(401)
 				.Produces<ApiResponse<string>>();
 
-			//routeGroupBuilder.MapGet("/get-posts-filter", GetFilteredPosts)
-			//	.WithName("GetFilteredPost")
-			//	.Produces<ApiResponse<PaginationResult<PostDto>>>();
+			routeGroupBuilder.MapGet("/get-posts-filter", GetFilteredPosts)
+				.WithName("GetFilteredPost")
+				.Produces<ApiResponse<PaginationResult<PostDto>>>();
 
-			//routeGroupBuilder.MapGet("/get-filter", GetFilter)
-			//	.WithName("GetFilter")
-			//	.Produces<ApiResponse<PaginationResult<PostFilterModel>>>();
+			routeGroupBuilder.MapGet("/get-filter", GetFilter)
+				.WithName("GetFilter")
+				.Produces<ApiResponse<PaginationResult<PostFilterModel>>>();
 
 			//routeGroupBuilder.MapGet("/addPost", AddPost)
 			//	.WithName("AddNewPost")
@@ -101,7 +101,6 @@ namespace TagBlog.WebApi.Endpoints
 
 		private static async Task<IResult> GetFilteredPosts(
 			[AsParameters] PostFilterModel model,
-			[AsParameters] PagingModel pagingModel,
 			IBlogRepository blogRepository)
 		{
 			var postQuery = new PostQuery()
@@ -114,7 +113,7 @@ namespace TagBlog.WebApi.Endpoints
 			};
 
 			var postsList = await blogRepository.GetPagedPostsAsync(
-				postQuery, pagingModel, posts =>
+				postQuery, model, posts =>
 				posts.ProjectToType<PostDto>());
 
 			var paginationResult = new PaginationResult<PostDto>(postsList);

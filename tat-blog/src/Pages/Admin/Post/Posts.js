@@ -1,28 +1,43 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
-import { Link } from "react-router-dom";
-import { getPosts } from "../../../Services/BlogRepository";
+import { Link, useParams, Navigate } from "react-router-dom";
+import { getPostsFilter } from "../../../Services/BlogRepository";
 import Loading from "../../../Components/Loading";
-// import { Tab } from "react-bootstrap";
+import { isInteger } from '../../../Utils/Utils';
 import PostFilterPane from "../../../Components/Admin/PostFilterPane";
+import { useSelector } from "react-redux";
 
-const Posts = ()=>{
-  const [postList, setPostList] = useState([]);
-  const [isVisibleLoading, setIsVisibleLoading] = useState(true);
+const Posts = () => {
+  const [postList, setPostList] = useState([]),
+    [isVisibleLoading, setIsVisibleLoading] = useState(true),
+    postFilter = useSelector(state => state.postFilter);
 
-  let k = '', p = 1, ps = 10;
+  let { id } = useParams(),
+    p = 1,
+    ps = 10;
 
   useEffect(() => {
     document.title = 'Danh sách bài viết';
-
-    getPosts(k, ps, p).then(data => {
-      if (data)
-        setPostList(data.items);
-      else
-        setPostList([]);
-      setIsVisibleLoading(false);
-    })
-  }, [k, p, ps])
+    getPostsFilter(postFilter.keyword,
+      postFilter.authorId,
+      postFilter.categoryId,
+      postFilter.year,
+      postFilter.month,
+      ps, p).then(data => {
+        if (data)
+          setPostList(data.items);
+        else
+          setPostList([]);
+        setIsVisibleLoading(false);
+      });
+  }, [
+    postFilter.keyword,
+    postFilter.authorId,
+    postFilter.categoryId,
+    postFilter.year,
+    postFilter.month,
+    p, ps
+  ]);
 
   return (
     <>
@@ -40,19 +55,19 @@ const Posts = ()=>{
           </thead>
           <tbody>
             {postList.length > 0 ? postList.map((item, index) =>
-            <tr key={index}>
-              <td>
-                <Link 
-                  to={`/admin/posts/edit/${item.id}`}
-                  className='text-bold'>
+              <tr key={index}>
+                <td>
+                  <Link
+                    to={`/admin/posts/edit/${item.id}`}
+                    className='text-bold'>
                     {item.title}
                   </Link>
                   <p className='text-muted'>{item.shortDescription}</p>
-              </td>
-              <td>{item.author.fullName}</td>
-              <td>{item.category.name}</td>
-              <td>{item.published ? "Có" : "Không"}</td>
-            </tr>
+                </td>
+                <td>{item.author.fullName}</td>
+                <td>{item.category.name}</td>
+                <td>{item.published ? "Có" : "Không"}</td>
+              </tr>
             ) :
               <tr>
                 <td colSpan={4}>
