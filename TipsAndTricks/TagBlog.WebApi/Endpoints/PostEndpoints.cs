@@ -66,11 +66,11 @@ namespace TagBlog.WebApi.Endpoints
 				.WithName("GetFilter")
 				.Produces<ApiResponse<PaginationResult<PostFilterModel>>>();
 
-			//routeGroupBuilder.MapGet("/addPost", AddPost)
-			//	.WithName("AddNewPost")
-			//	.Accepts<PostEditModel>("multipart/form-data")
-			//	.Produces(401)
-			//	.Produces<ApiResponse<PaginationResult<PostItem>>>();
+			routeGroupBuilder.MapGet("/addPost", AddPost)
+				.WithName("AddNewPost")
+				.Accepts<PostEditModel>("multipart/form-data")
+				.Produces(401)
+				.Produces<ApiResponse<PaginationResult<PostItem>>>();
 
 			return app;
 		}

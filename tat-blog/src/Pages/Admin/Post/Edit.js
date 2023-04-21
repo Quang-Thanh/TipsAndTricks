@@ -54,16 +54,23 @@ const Edit = () => {
           categoryList: [],
         });
     })
-  }, [])
+  }, []);
+
+  const [validated, setValidated] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
-    let form = new FormData(e.target);
-    addOrUpdatePost(form).then(data => {
-      if (data)
-        alert('Đã luu thành công!');
-      else
-        alert('Đã xảy ra lỗi!');
-    });
+    if (e.currentTarget.checkValidity() === false) {
+      e.stopPropagation();
+      setValidated(true);
+    } else {
+      let form = new FormData(e.target);
+      addOrUpdatePost(form).then(data => {
+        if (data)
+          alert('Đã luu thành công!');
+        else
+          alert('Đã xảy ra lỗi!');
+      });
+    }
   }
 
   if (id && !isInteger(id))
@@ -75,8 +82,13 @@ const Edit = () => {
       <Form
         method='post'
         encType='multipart/form-data'
-        onSubmit={handleSubmit}>
+        onSubmit={handleSubmit}
+        noValidate
+        validated={validated}>
         <Form.Control type='hidden' name='id' value={post.id} />
+        <Form.Control.Feedback type='invalid'>
+          Không được bỏ trống.
+        </Form.Control.Feedback>
         <div className='row mb-3'>
           <Form.Label className='col-sm-2 col-form-label'>
             Tiêu đề
@@ -93,6 +105,9 @@ const Edit = () => {
                 title: e.target.value
               })}
             />
+            <Form.Control.Feedback type='invalid'>
+              Không được bỏ trống.
+            </Form.Control.Feedback>
           </div>
         </div>
         <div className='row mb-3'>
@@ -110,6 +125,9 @@ const Edit = () => {
                 urlSlug: e.target.value
               })}
             />
+            <Form.Control.Feedback type='invalid'>
+              Không được bỏ trống.
+            </Form.Control.Feedback>
           </div>
         </div>
         <div className='row mb-3'>
@@ -118,7 +136,7 @@ const Edit = () => {
           </Form.Label>
           <div className='col-sm-10'>
             <Form.Control
-              as='texttarea'
+              as='textarea'
               type='text'
               required
               name='shortDescription'
@@ -129,6 +147,9 @@ const Edit = () => {
                 shortDescription: e.target.value
               })}
             />
+            <Form.Control.Feedback type='invalid'>
+              Không được bỏ trống.
+            </Form.Control.Feedback>
           </div>
         </div>
         <div className='row mb-3'>
@@ -149,6 +170,9 @@ const Edit = () => {
                 description: e.target.value
               })}
             />
+            <Form.Control.Feedback type='invalid'>
+              Không được bỏ trống.
+            </Form.Control.Feedback>
           </div>
         </div>
         <div className='row mb-3'>
@@ -233,6 +257,9 @@ const Edit = () => {
               })}
             >
             </Form.Control>
+            <Form.Control.Feedback type='invalid'>
+              Không được bỏ trống.
+            </Form.Control.Feedback>
           </div>
         </div>
         {!isEmptyOrSpaces(post.imageUrl) && <div className='row mb-3'>
@@ -259,6 +286,9 @@ const Edit = () => {
                 imageFile: e.target.files[0]
               })}
             />
+            <Form.Control.Feedback type='invalid'>
+              Không được bỏ trống.
+            </Form.Control.Feedback>
           </div>
         </div>
         <div className='row mb-3'>
